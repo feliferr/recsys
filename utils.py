@@ -120,7 +120,7 @@ def aggregate_title_embeddings(df, X):
   title_list = list(df['title_name'].unique())
 
   for tit in title_list:
-    videos_indexes = list(df_merged[df['title_name']==tit].index)
+    videos_indexes = list(df[df['title_name']==tit].index)
     
     emb_title = np.mean(X[videos_indexes], axis=0)
 
