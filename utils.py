@@ -612,9 +612,9 @@ def make_model_multi(n_features, n_classes):
 
   model.add(Dense(n_classes, activation='sigmoid',name='fc5'))
 
-  model.compile(loss=macro_soft_f1,
+  model.compile(loss='binary_crossentropy',
                 optimizer='adam',
-                metrics=[macro_f1])
+                metrics=['acc'])
   return model
 
 
