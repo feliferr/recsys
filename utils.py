@@ -57,18 +57,18 @@ else:
     print("Please install GPU version of TF for better performance")
 
 
-def plot_history(history):
-    acc = history.history['accuracy']
-    val_acc = history.history['val_accuracy']
+def plot_history(history, metric_train, metric_val):
+    acc = history.history[metric_train]
+    val_acc = history.history[metric_val]
     loss = history.history['loss']
     val_loss = history.history['val_loss']
     x = range(1, len(acc) + 1)
 
     plt.figure(figsize=(12, 5))
     plt.subplot(1, 2, 1)
-    plt.plot(x, acc, 'b', label='Training acc')
-    plt.plot(x, val_acc, 'r', label='Validation acc')
-    plt.title('Training and validation accuracy')
+    plt.plot(x, acc, 'b', label='Training {}'.format(metric_train))
+    plt.plot(x, val_acc, 'r', label='Validation {}'.format(metric_val))
+    plt.title('Training and validation {}'.format(metric_train))
     plt.legend()
     plt.subplot(1, 2, 2)
     plt.plot(x, loss, 'b', label='Training loss')
