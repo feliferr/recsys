@@ -561,6 +561,16 @@ def generate_multiclass(row):
 
   return genres_list + content_rating_criteria_list + content_rating_list
 
+def generate_multiclass_genre_only(row):
+  genres_names = row['genres_names']
+  #content_rating = row['content_rating']
+  #content_rating_criteria = row['content_rating_criteria']
+
+  genres_list         = load_from_list(genres_names) if len(genres_names) > 0 else ['unknow_genre']
+  #content_rating_list = [content_rating] if content_rating is not None else ['99']
+  #content_rating_criteria_list = load_from_list(content_rating_criteria) if len(content_rating_criteria)> 0 else ['unknow_criteria']
+
+  return genres_list
 
 # Criação do modelo de rede neural para a classificação de títulos
 def make_model(n_features, n_classes):
