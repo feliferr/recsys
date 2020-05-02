@@ -20,7 +20,7 @@ plt.style.use('ggplot')
 
 
 from keras.utils import plot_model
-
+from keras import regularizers
 
 from gensim.models.keyedvectors import KeyedVectors
 
@@ -606,6 +606,33 @@ def make_model_multi(n_features, n_classes):
   model.add(Activation('relu',name='ac3'))
   model.add(Dropout(0.15))
   model.add(Dense(256, kernel_initializer='glorot_normal', use_bias=False, name='fc4'))
+  model.add(BatchNormalization(name='bn4'))
+  model.add(Activation('relu',name='ac4'))
+  model.add(Dropout(0.1))
+
+  model.add(Dense(n_classes, activation='sigmoid',name='fc5'))
+
+  model.compile(loss='binary_crossentropy',
+                optimizer='adam',
+                metrics=['acc'])
+  return model
+
+def make_model_multi_reg(n_features, n_classes):
+  model = Sequential()
+  model.add(Dense(1024, input_shape=(n_features,),
+            kernel_initializer='glorot_normal', name='fc1'))
+  model.add(BatchNormalization(name='bn1'))
+  model.add(Activation('relu',name='ac1'))
+  model.add(Dropout(0.5))
+  model.add(Dense(512, kernel_initializer='glorot_normal', kernel_regularizer=regularizers.l2(0.01), use_bias=True, name='fc2'))
+  model.add(BatchNormalization(name='bn2'))
+  model.add(Activation('relu',name='ac2'))
+  model.add(Dropout(0.25))
+  model.add(Dense(512, kernel_initializer='glorot_normal', kernel_regularizer=regularizers.l2(0.01), use_bias=True, name='fc3'))
+  model.add(BatchNormalization(name='bn3'))
+  model.add(Activation('relu',name='ac3'))
+  model.add(Dropout(0.15))
+  model.add(Dense(256, kernel_initializer='glorot_normal', kernel_regularizer=regularizers.l2(0.01), use_bias=True, name='fc4'))
   model.add(BatchNormalization(name='bn4'))
   model.add(Activation('relu',name='ac4'))
   model.add(Dropout(0.1))
