@@ -696,6 +696,22 @@ def train_model_multilabel(X, y, n_batch_size=128, n_epochs=40, n_validation_spl
 
   return (history, model)
 
+def train_model_multilabel_reg(X, y, n_batch_size=128, n_epochs=40, n_validation_split=0.1):
+
+  mlb = MultiLabelBinarizer()
+  y_encoded = mlb.fit_transform(y)
+
+  print(y_encoded.shape)
+
+  n_class = len(mlb.classes_)
+
+  model = make_model_multi_reg(X.shape[1], n_class)
+  print(model.summary())
+
+  history = model.fit(X, y_encoded, batch_size=n_batch_size, epochs=n_epochs, validation_split=n_validation_split)
+
+  return (history, model)
+
 @tf.function
 def macro_soft_f1(y, y_hat):
     """Compute the macro soft F1-score as a cost (average 1 - soft-F1 across all labels).
