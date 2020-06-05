@@ -285,15 +285,18 @@ def print_recommendations(model_trained, df, X, query, top_n=10):
 
 def print_recommendations_html(recommendations_mod, df_tf, query, top_n=10):
 
-  url = "https://globoplay.globo.com/v/t/{}/".format(df_tf[df_tf['title_name']==query]['title_id'].values[0])
-  description = df_tf[df_tf['title_name']==query]['title_description'].values[0]
-  image = df_tf[df_tf['title_name']==query]['title_cover'].values[0]
-  metadata_type = df_tf[df_tf['title_name']==query]['metadata_type'].values[0]
 
-  content_rating = df_tf[df_tf['title_name']==query]['content_rating'].values[0]
+  title_df = df_tf[df_tf['title_id']==query]
 
-  content_rating_criteria = df_tf[df_tf['title_name']==query]['content_rating_criteria'].values[0]
-  genres_names = df_tf[df_tf['title_name']==query]['genres_names'].values[0]
+  url = "https://globoplay.globo.com/v/t/{}/".format(title_df['title_id'].values[0])
+  description = title_df['title_description'].values[0]
+  image = title_df['title_cover'].values[0]
+  metadata_type = title_df['metadata_type'].values[0]
+
+  content_rating = title_df['content_rating'].values[0]
+
+  content_rating_criteria = title_df['content_rating_criteria'].values[0]
+  genres_names = title_df['genres_names'].values[0]
 
   content_rating_criteria_list = load_from_list(content_rating_criteria)
   genres_names_list = load_from_list(genres_names)
