@@ -230,23 +230,25 @@ def fetch_preview_table_df(title_recs, df_inf):
   <table>{}</table>
   """
 
-  for title_name, score in title_recs:
-    title_preview_name = df_inf[df_inf['title_name']==title_name]['title_preview_name'].values[0]
-    description = df_inf[df_inf['title_name']==title_name]['title_description'].values[0]
-    image = df_inf[df_inf['title_name']==title_name]['title_cover'].values[0]
+  for title_id, score in title_recs:
+    title_df = df_inf[df_inf['title_id']==title_id]
+    title_name = title_df['title_name'].values[0]
+    title_preview_name = title_df['title_preview_name'].values[0]
+    description = title_df['title_description'].values[0]
+    image = title_df['title_cover'].values[0]
 
-    metadata_type = df_inf[df_inf['title_name']==title_name]['metadata_type'].values[0]
-    content_rating = df_inf[df_inf['title_name']==title_name]['content_rating'].values[0]
+    metadata_type = title_df['metadata_type'].values[0]
+    content_rating = title_df['content_rating'].values[0]
 
-    content_rating_criteria = df_inf[df_inf['title_name']==title_name]['content_rating_criteria'].values[0]
-    genres_names = df_inf[df_inf['title_name']==title_name]['genres_names'].values[0]
+    content_rating_criteria = title_df['content_rating_criteria'].values[0]
+    genres_names = title_df['genres_names'].values[0]
 
     content_rating_criteria_list = load_from_list(content_rating_criteria)
     genres_names_list = load_from_list(genres_names)
 
 
     #url_query = df_inf[df_inf['title_name']==title_name]['url_globoplay'].values[0]
-    url_query = url_template.format(df_inf[df_inf['title_name']==title_name]['title_id'].values[0])
+    url_query = url_template.format(title_df['title_id'].values[0])
 
     if title_preview_name == 'Ops...':
       continue
@@ -328,12 +330,12 @@ def fetch_preview_json_df(title_recs, df_inf):
   <table>{}</table>
   """
 
-  for title_name, score in title_recs:
+  for title_id, score in title_recs:
 
-    df_filtered_query = df_inf[df_inf['title_name']==title_name]
+    df_filtered_query = df_inf[df_inf['title_id']==title_id]
 
     title_preview_name = df_filtered_query['title_preview_name'].values[0]
-    title_id           = df_filtered_query['title_id'].values[0]
+    title_name           = df_filtered_query['title_name'].values[0]
     description        = df_filtered_query['title_description'].values[0]
     image              = df_filtered_query['title_cover'].values[0]
 
@@ -395,17 +397,18 @@ def fetch_preview_json_df_simple(title_recs, df_inf):
   <table>{}</table>
   """
 
-  for title_name, score in title_recs:
-    title_preview_name = df_inf[df_inf['title_name']==title_name]['title_preview_name'].values[0]
-    title_id = df_inf[df_inf['title_name']==title_name]['title_id'].values[0]
-    description = df_inf[df_inf['title_name']==title_name]['title_description'].values[0]
-    image = df_inf[df_inf['title_name']==title_name]['title_cover'].values[0]
+  for title_id, score in title_recs:
+    title_df = df_inf[df_inf['title_name']==title_id]
+    title_name = title_df['title_name'].values[0]
+    title_preview_name = title_df['title_preview_name'].values[0]
+    description = title_df['title_description'].values[0]
+    image = title_df['title_cover'].values[0]
 
-    metadata_type = df_inf[df_inf['title_name']==title_name]['metadata_type'].values[0]
-    content_rating = df_inf[df_inf['title_name']==title_name]['content_rating'].values[0]
+    metadata_type = title_df['metadata_type'].values[0]
+    content_rating = title_df['content_rating'].values[0]
 
-    content_rating_criteria = df_inf[df_inf['title_name']==title_name]['content_rating_criteria'].values[0]
-    genres_names = df_inf[df_inf['title_name']==title_name]['genres_names'].values[0]
+    content_rating_criteria = title_df['content_rating_criteria'].values[0]
+    genres_names = title_df['genres_names'].values[0]
 
     content_rating_criteria_list = load_from_list(content_rating_criteria)
     genres_names_list = load_from_list(genres_names)
@@ -413,7 +416,7 @@ def fetch_preview_json_df_simple(title_recs, df_inf):
 
 
     #url_query = df_inf[df_inf['title_name']==title_name]['url_globoplay'].values[0]
-    url_query = url_template.format(df_inf[df_inf['title_name']==title_name]['title_id'].values[0])
+    url_query = url_template.format(title_df['title_id'].values[0])
 
     if title_preview_name == 'Ops...':
       continue
@@ -475,12 +478,12 @@ def print_recommendations_json(recommendations_mod, df_tf, query, top_n=10):
 
 def print_recommendations_json_simple(recommendations_mod, df_tf, query, top_n=10):
 
-  df_filtered_query = df_tf[df_tf['title_name']==query]
+  df_filtered_query = df_tf[df_tf['title_id']==query]
 
   url = "https://globoplay.globo.com/v/t/{}/".format(df_filtered_query['title_id'].values[0])
 
   description        = df_filtered_query['title_description'].values[0]
-  title_id           = df_filtered_query['title_id'].values[0]
+  title_name           = df_filtered_query['title_name'].values[0]
   title_preview_name = df_filtered_query['title_preview_name'].values[0]
   image              = df_filtered_query['title_cover'].values[0]
   metadata_type      = df_filtered_query['metadata_type'].values[0]
@@ -506,8 +509,8 @@ def print_recommendations_json_simple(recommendations_mod, df_tf, query, top_n=1
   if title_preview_name == 'Ops...':
     return None
 
-  titulo_base = {'title_id':title_id,
-                 'title_name':query,
+  titulo_base = {'title_id':query,
+                 'title_name':title_name,
                  'url':url,
                  'description':description,
                  'image':image,
@@ -528,17 +531,18 @@ def print_recommendations_json_simple(recommendations_mod, df_tf, query, top_n=1
 
 def print_title_json_simple(df_tf, query):
 
-  url = "https://globoplay.globo.com/v/t/{}/".format(df_tf[df_tf['title_name']==query]['title_id'].values[0])
-  description = df_tf[df_tf['title_name']==query]['title_description'].values[0]
-  title_id = df_tf[df_tf['title_name']==query]['title_id'].values[0]
-  title_preview_name = df_tf[df_tf['title_name']==query]['title_preview_name'].values[0]
-  image = df_tf[df_tf['title_name']==query]['title_cover'].values[0]
-  metadata_type = df_tf[df_tf['title_name']==query]['metadata_type'].values[0]
+  title_df = df_tf[df_tf['title_id']==query]
+  url = "https://globoplay.globo.com/v/t/{}/".format(title_df['title_id'].values[0])
+  description = title_df['title_description'].values[0]
+  title_name = title_df['title_id'].values[0]
+  title_preview_name = title_df['title_preview_name'].values[0]
+  image = title_df['title_cover'].values[0]
+  metadata_type = title_df['metadata_type'].values[0]
 
-  content_rating = df_tf[df_tf['title_name']==query]['content_rating'].values[0]
+  content_rating = title_df['content_rating'].values[0]
 
-  content_rating_criteria = df_tf[df_tf['title_name']==query]['content_rating_criteria'].values[0]
-  genres_names = df_tf[df_tf['title_name']==query]['genres_names'].values[0]
+  content_rating_criteria = title_df['content_rating_criteria'].values[0]
+  genres_names = title_df['genres_names'].values[0]
 
   content_rating_criteria_list = load_from_list(content_rating_criteria)
   genres_names_list = load_from_list(genres_names)
@@ -546,8 +550,8 @@ def print_title_json_simple(df_tf, query):
   if title_preview_name == 'Ops...':
     return None
 
-  titulo_base = {'title_id':title_id,
-                 'title_name':query,
+  titulo_base = {'title_id':query,
+                 'title_name':title_name,
                  'image':image}
 
   return titulo_base
