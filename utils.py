@@ -534,7 +534,7 @@ def print_title_json_simple(df_tf, query):
   title_df = df_tf[df_tf['title_id']==query]
   url = "https://globoplay.globo.com/v/t/{}/".format(title_df['title_id'].values[0])
   description = title_df['title_description'].values[0]
-  title_name = title_df['title_id'].values[0]
+  title_name = title_df['title_name'].values[0]
   title_preview_name = title_df['title_preview_name'].values[0]
   image = title_df['title_cover'].values[0]
   metadata_type = title_df['metadata_type'].values[0]
