@@ -523,7 +523,7 @@ def print_recommendations_json_simple(recommendations_mod, df_tf, query, top_n=1
                  'cast':cast_names_list,
                  'release_year':release_year}
   
-  recs = fetch_preview_json_df(list(recommendations_mod[query][1:top_n]), df_tf)
+  recs = fetch_preview_json_df(list(recommendations_mod[query][:top_n]), df_tf)
 
   json_output = {'base_title':titulo_base, 'recommendations':recs}
 
