@@ -467,7 +467,7 @@ def print_recommendations_json(recommendations_mod, df_tf, query, top_n=10):
   
 
   # html_recs = fetch_preview_json_df(list(recommendations_mod[query][1:top_n]), df_tf)
-  recs = fetch_preview_json_df(list(recommendations_mod[query][1:top_n]), df_tf)
+  recs = fetch_preview_json_df(list(recommendations_mod[query][:top_n]), df_tf)
 
   # html_output = """<html><body>{v1}<div></div>{v2}</body></html>
   #   """.format(v1=html_query,v2=html_recs)
