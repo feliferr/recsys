@@ -1,0 +1,8 @@
+tensorflow
+pandas
+seaborn
+sklearn
+gensim
+imblearn
+nltk
+IPython
