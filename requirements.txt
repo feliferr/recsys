@@ -1,8 +1,10 @@
-tensorflow
+tensorflow==2.8.2
 pandas
+pandas_gbq
 seaborn
 sklearn
 gensim
 imblearn
 nltk
+plotly
 IPython

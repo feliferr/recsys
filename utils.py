@@ -12,7 +12,7 @@ from plotly.offline import download_plotlyjs, init_notebook_mode, plot, iplot
 from sklearn import preprocessing
 from sklearn.preprocessing import MinMaxScaler
 import plotly.express as px
-from keras.models import load_model
+from tensorflow.keras.models import load_model
 import json
 import tensorflow as tf
 import matplotlib.pyplot as plt
@@ -20,7 +20,7 @@ plt.style.use('ggplot')
 
 
 from tensorflow.keras.utils import plot_model
-from keras import regularizers
+from tensorflow.keras import regularizers
 
 from gensim.models.keyedvectors import KeyedVectors
 
@@ -28,8 +28,8 @@ from imblearn.keras import BalancedBatchGenerator
 from imblearn.over_sampling import SMOTE
 from imblearn.over_sampling import RandomOverSampler
 
-from keras.models import Sequential
-from keras.layers import concatenate, \
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import concatenate, \
 Activation, Dense, Dropout, BatchNormalization, Embedding, Input, LSTM,Conv1D, Concatenate, Reshape,Conv2D, MaxPool2D, MaxPooling1D,Flatten, Embedding
 from tensorflow.keras.utils import to_categorical
 from sklearn.preprocessing import LabelEncoder
@@ -43,7 +43,7 @@ from nltk import FreqDist
 # from keras.preprocessing.text import Tokenizer
 # from keras.preprocessing.sequence import pad_sequences
 
-from keras.models import Model
+from tensorflow.keras.models import Model
 from sklearn.preprocessing import normalize
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.decomposition import PCA
