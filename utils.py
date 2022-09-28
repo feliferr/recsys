@@ -39,9 +39,9 @@ import re
 import nltk
 from nltk.tokenize import word_tokenize
 from nltk import FreqDist
-from nltk.corpus import stopwords
-from keras.preprocessing.text import Tokenizer
-from keras.preprocessing.sequence import pad_sequences
+# from nltk.corpus import stopwords
+# from keras.preprocessing.text import Tokenizer
+# from keras.preprocessing.sequence import pad_sequences
 
 from keras.models import Model
 from sklearn.preprocessing import normalize
