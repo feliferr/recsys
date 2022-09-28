@@ -19,7 +19,7 @@ import matplotlib.pyplot as plt
 plt.style.use('ggplot')
 
 
-from keras.utils import plot_model
+from tensorflow.keras.utils import plot_model
 from keras import regularizers
 
 from gensim.models.keyedvectors import KeyedVectors
@@ -31,7 +31,7 @@ from imblearn.over_sampling import RandomOverSampler
 from keras.models import Sequential
 from keras.layers import concatenate, \
 Activation, Dense, Dropout, BatchNormalization, Embedding, Input, LSTM,Conv1D, Concatenate, Reshape,Conv2D, MaxPool2D, MaxPooling1D,Flatten, Embedding
-from keras.utils import to_categorical
+from tensorflow.keras.utils import to_categorical
 from sklearn.preprocessing import LabelEncoder
 from sklearn.preprocessing import OneHotEncoder
 
