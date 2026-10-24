@@ -80,3 +80,7 @@ docs/           architecture.md, roadmap.md, research-notes.md
 - [Arquitetura](docs/architecture.md): princípios, módulos, contratos e CI.
 - [Roadmap](docs/roadmap.md): fases, status e pontos em aberto.
 - [Notas de pesquisa](docs/research-notes.md): leituras que motivam as escolhas de design.
+
+## Licença
+
+MIT. Ver [LICENSE](LICENSE).
