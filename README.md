@@ -23,7 +23,7 @@ Learned models and serving are planned.*
 ## Como rodar
 
 ```bash
-conda env create -f environment.yml     # cria o ambiente "recsys" (Python 3.11)
+conda env create -f environment.yml     # cria o ambiente "recsys" (Python 3.11 a 3.13)
 conda activate recsys
 ruff check . && ruff format --check .
 mypy
