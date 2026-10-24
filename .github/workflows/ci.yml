@@ -1,0 +1,34 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [master]
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.11", "3.12"]
+    defaults:
+      run:
+        shell: bash -el {0}
+    steps:
+      - uses: actions/checkout@v7
+      - uses: conda-incubator/setup-miniconda@v3
+        with:
+          environment-file: environment.yml
+          activate-environment: recsys
+          python-version: ${{ matrix.python-version }}
+          channels: conda-forge
+          channel-priority: strict
+      - run: ruff check .
+      - run: ruff format --check .
+      - run: mypy
+      - run: lint-imports
+      - run: pytest -m "not slow" --cov --cov-report=term-missing

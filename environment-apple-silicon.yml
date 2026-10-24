@@ -1,0 +1,13 @@
+# Igual a environment.yml, mais PyTorch (MPS) e MLX para prototipagem local em Apple Silicon.
+#   conda env create -f environment-apple-silicon.yml && conda activate recsys-mps
+name: recsys-mps
+channels:
+  - conda-forge
+dependencies:
+  - python=3.11
+  - pip
+  - numpy>=2.0
+  - pandas>=3.0
+  - pyarrow>=17
+  - pip:
+      - -e .[dev,torch,mlx]

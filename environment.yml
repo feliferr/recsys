@@ -1,0 +1,15 @@
+# Ambiente de desenvolvimento local (conda). Uso:
+#   conda env create -f environment.yml && conda activate recsys
+# Pacotes numéricos vêm do conda-forge; o restante (e as ferramentas de dev) via pip a
+# partir do pyproject.toml, que é a fonte de verdade das dependências.
+name: recsys
+channels:
+  - conda-forge
+dependencies:
+  - python=3.11
+  - pip
+  - numpy>=2.0
+  - pandas>=3.0
+  - pyarrow>=17
+  - pip:
+      - -e .[dev]

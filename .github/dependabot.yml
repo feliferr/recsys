@@ -1,0 +1,31 @@
+# Política: poucas PRs, em lote, só quando há motivo.
+#
+# - pip: os limites em pyproject.toml são *pisos* de compatibilidade (sem teto). Com
+#   `increase-if-necessary` o Dependabot só mexe neles se a última versão sair da faixa permitida,
+#   ou seja, nunca por simples release novo. Alertas de segurança continuam gerando PR
+#   (configuração separada, não afetada por este arquivo).
+# - github-actions: um único PR mensal agrupando tudo.
+# - cooldown: ignora releases com menos de 7 dias (mitiga versões quebradas / supply chain).
+version: 2
+updates:
+  - package-ecosystem: pip
+    directory: /
+    schedule:
+      interval: monthly
+    versioning-strategy: increase-if-necessary
+    open-pull-requests-limit: 2
+    cooldown:
+      default-days: 7
+    groups:
+      python-deps:
+        patterns: ["*"]
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly
+    open-pull-requests-limit: 1
+    cooldown:
+      default-days: 7
+    groups:
+      actions:
+        patterns: ["*"]
